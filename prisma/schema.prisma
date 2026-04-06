@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String        @id @default(cuid())
+  name           String?
+  email          String?       @unique
+  emailVerified  DateTime?
+  image          String?
+  password       String?
+  role           String        @default("USER")
+  organizationId String?
+  assessments    Assessment[]
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+}
+
+model Organization {
+  id          String       @id @default(cuid())
+  name        String
+  industry    String?
+  size        Int?
+  assessments Assessment[]
+  risks       Risk[]
+  users       User[]
+}
+
+model Risk {
+  id             String       @id @default(cuid())
+  organizationId String
+  description    String
+  status         String       @default("OPEN")
+  probability    Int          @default(0)
+  impact         Int          @default(0)
+  mitigationPlan String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+}
+
+model MaturityModel {
+  id          String       @id @default(cuid())
+  name        String
+  description String?
+  version     String       @default("1.0")
+  assessments Assessment[]
+  dimensions  Dimension[]
+}
+
+model Dimension {
+  id                String             @id @default(cuid())
+  name              String
+  description       String?
+  maturityModelId   String
+  maturityModel     MaturityModel      @relation(fields: [maturityModelId], references: [id], onDelete: Cascade)
+  levelDescriptions LevelDescription[]
+  questions         Question[]
+}
+
+model LevelDescription {
+  id          String    @id @default(cuid())
+  dimensionId String
+  level       Int
+  name        String
+  description String
+  dimension   Dimension @relation(fields: [dimensionId], references: [id], onDelete: Cascade)
+}
+
+model Question {
+  id          String    @id @default(cuid())
+  code        String?   @unique
+  text        String
+  dimensionId String
+  answers     Answer[]
+  dimension   Dimension @relation(fields: [dimensionId], references: [id], onDelete: Cascade)
+}
+
+model Assessment {
+  id              String        @id @default(cuid())
+  organizationId  String
+  userId          String
+  maturityModelId String
+  status          String        @default("IN_PROGRESS")
+  jobLevel        String?
+  department      String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  answers         Answer[]
+  maturityModel   MaturityModel @relation(fields: [maturityModelId], references: [id], onDelete: Cascade)
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization    Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+}
+
+model Answer {
+  id           String     @id @default(cuid())
+  assessmentId String
+  questionId   String
+  score        Int
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  question     Question   @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  assessment   Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+
+  @@unique([assessmentId, questionId])
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+}
