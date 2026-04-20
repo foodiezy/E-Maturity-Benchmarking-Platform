@@ -1,48 +1,98 @@
 # E-Maturity Benchmarking Suite
 
-A comprehensive, full-stack Next.js web application designed to facilitate organizational e-maturity benchmarking, robust visual analytics, and strict Role-Based Access Control (RBAC). Built for an academic Final Year Project (FYP).
+A comprehensive, full-stack Next.js web application designed to facilitate organisational e-maturity benchmarking through the Adaptive Integrated Maturity Model (AIMM). Features robust visual analytics, strict Role-Based Access Control (RBAC), and a consultancy-grade risk register.
 
 ## Features
-*   **Dynamic Assessment Engine**: A fully interactive, responsive quiz engine for standard users to evaluate their organization's maturity.
-*   **Role-Based Security**: Built-in NextAuth routing locks non-administrative members out of analytics suites.
-*   **Consultant Dashboard**: Create, edit, and version complex Maturity Models natively in the browser.
-*   **Mathematical Visualizations**: Integrated Recharts dynamically processes assessment responses into visually stunning Radar and Bar gap-analysis graphs.
-*   **Personal Isolated Vaults**: Every user has a secure personal dashboard isolated purely to their own dataset.
+
+- **Dynamic Assessment Engine** — A fully interactive, multi-step quiz engine for standard users to evaluate their organisation's maturity across People, Innovation, and Capability dimensions.
+- **Role-Based Security (RBAC)** — Built-in NextAuth routing strictly isolates consultant-only analytics suites from standard users via middleware and layout-level guards.
+- **Consultant Dashboard** — Create, edit, and version complex Maturity Models natively in the browser with a full CRUD matrix editor.
+- **Mathematical Visualisations** — Integrated Recharts dynamically processes assessment responses into Radar and Bar gap-analysis graphs, segmented by job level and department.
+- **Personal Isolated Vaults** — Every standard user has a secure personal dashboard isolated purely to their own dataset.
+- **Organisation-Aware Architecture** — Users join or create organisations during registration, enabling aggregated cross-organisational analytics.
+- **Risk & Mitigation Register** — Centralised CRUD tracking of operational and maturity risks across all client organisations.
+- **PDF Report Export** — One-click downloadable assessment reports for consultant distribution.
+- **Monochromatic Design System** — Premium brutalist black-and-white UI with unDraw illustrations, consistent across every page.
 
 ## Tech Stack
-*   **Frontend**: React, Next.js (App Router), Tailwind CSS
-*   **Backend**: Next.js Server API Routes, Node.js
-*   **Database**: SQLite managed via Prisma ORM
-*   **Authentication**: NextAuth.js (bcryptjs encrypted credentials)
+
+| Layer           | Technology                                     |
+| --------------- | ---------------------------------------------- |
+| **Frontend**    | React 18, Next.js 14 (App Router), Tailwind CSS |
+| **Backend**     | Next.js Server API Routes, Node.js             |
+| **Database**    | SQLite managed via Prisma ORM                  |
+| **Auth**        | NextAuth.js (bcryptjs encrypted credentials)   |
+| **Charts**      | Recharts                                       |
+| **Illustrations** | undraw-react                                 |
 
 ---
 
-## How to Run This on Another Computer
-If you are downloading this repository onto a completely new laptop, follow these exact steps to run it locally:
+## How to Run Locally
 
 ### Prerequisites
-1. You must have **[Node.js](https://nodejs.org/)** installed on your computer.
 
-### Step-by-Step Installation
-1. **Clone or Download the Project**: 
-   Click the green "Code" button on GitHub and "Download ZIP" or run `git clone https://github.com/foodiezy/e-maturity-benchmarking-suite.git`.
-2. **Open your Terminal**: Navigate inside the extracted project folder using your terminal or Command Prompt.
-3. **Install the Dependencies**:
-   Run the following command to download all necessary libraries:
+- **[Node.js](https://nodejs.org/)** (v18 or later recommended)
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/foodiezy/E-Maturity-Benchmarking-Platform.git
+   cd E-Maturity-Benchmarking-Platform
+   ```
+
+2. **Install dependencies**:
    ```bash
    npm install
    ```
-4. **Link the Database**:
-   Because the database structure needs to be instantiated, run Prisma's push command:
+
+3. **Create the environment file**:
+   Create a `.env` file in the project root with:
+   ```
+   DATABASE_URL="file:./dev.db"
+   NEXTAUTH_SECRET="your-secret-key"
+   ```
+
+4. **Initialise the database**:
    ```bash
    npx prisma db push
    ```
-   *(This safely spins up the local SQLite database inside your folder based on the `schema.prisma` rules).*
-5. **Start the Engine!**:
+
+5. **Seed the database** (optional — creates the AIMM model, sample risks, and an admin account):
+   ```bash
+   npx prisma db seed
+   ```
+
+6. **Start the development server**:
    ```bash
    npm run dev
    ```
-6. **Open your Browser**: Go to `http://localhost:3000` to interact with the platform.
 
-### Standard Login Testing
-To fully test the platform, navigating to `http://localhost:3000/auth/signup` will allow you to quickly create an account. New accounts possess the standard `USER` role.
+7. **Open your browser** at `http://localhost:3000`
+
+### Testing Accounts
+
+- Navigate to `/auth/signup` to register a new standard `USER` account.
+- If you ran the seed script, an admin account is available: `admin@aimm.local` / `admin123`.
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── api/            # REST API routes (auth, assessment, models, risks, etc.)
+│   ├── assessment/     # Public assessment pages (directory, wizard, personal results)
+│   ├── auth/           # Sign-in and sign-up pages
+│   ├── consultant/     # Protected consultant area (dashboard, analytics, results, risks, model editor)
+│   └── contact/        # Contact form page
+├── components/         # Reusable React components (charts, editors, wizards)
+├── lib/                # Shared utilities (Prisma client, NextAuth config)
+└── types/              # TypeScript type declarations
+prisma/
+├── schema.prisma       # Database schema definition
+└── seed.ts             # Database seed script
+```
+
+## Licence
+
+This project was developed as an academic Final Year Project.

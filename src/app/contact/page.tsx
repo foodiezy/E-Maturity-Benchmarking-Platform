@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Analysis } from 'undraw-react'
+import { MessageSent } from 'undraw-react'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
@@ -51,7 +51,7 @@ export default function ContactPage() {
       <div className="flex-1 w-full max-w-xl flex justify-center">
         {/* unDraw illustration explicitly black/white */}
         <div className="w-full grayscale contrast-200 drop-shadow-2xl opacity-90">
-          <Analysis primaryColor="#000000" height="300px" />
+          <MessageSent color="#000000" style={{ height: '300px' }} />
         </div>
       </div>
 

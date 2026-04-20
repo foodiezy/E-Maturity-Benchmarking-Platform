@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import ReportExportButton from '@/components/ReportExportButton'
+import { DetailedExamination } from 'undraw-react'
 
 export const dynamic = 'force-dynamic'
 
@@ -50,7 +51,7 @@ export default async function ResultAnalyticsPage({ params }: { params: { assess
   return (
     <div className="max-w-7xl mx-auto py-8 px-4">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 mb-12 border-b-2 border-black pb-8">
-        <div>
+        <div className="flex-1">
           <a href="/consultant/results" className="text-sm font-bold text-neutral-500 hover:text-black uppercase tracking-widest transition-colors mb-4 inline-block">
             &larr; Back to Global Analytics
           </a>
@@ -58,6 +59,9 @@ export default async function ResultAnalyticsPage({ params }: { params: { assess
           <p className="mt-2 text-sm font-bold uppercase tracking-widest text-neutral-500">Survey compiled by {assessment.user.name} on {new Date(assessment.createdAt).toLocaleDateString()}</p>
         </div>
         <div className="flex items-center gap-6">
+          <div className="hidden md:block w-full max-w-[140px] grayscale contrast-200 opacity-70">
+            <DetailedExamination color="#000000" style={{ height: '100px' }} />
+          </div>
           <div className="text-right">
              <div className="text-xs font-black text-neutral-500 uppercase tracking-widest mb-1">Global Index</div>
              <div className="text-6xl font-black text-black tracking-tighter">{overallAvg} <span className="text-2xl text-neutral-400">/ 5</span></div>

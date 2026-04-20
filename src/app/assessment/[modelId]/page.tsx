@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import AssessmentWizard from '@/components/AssessmentWizard'
+import { Quiz } from 'undraw-react'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,9 +24,14 @@ export default async function TakeAssessment({ params }: { params: { modelId: st
 
   return (
     <div className="max-w-4xl mx-auto py-8">
-      <div className="mb-8 p-8 border-2 border-black bg-black text-white">
-        <h1 className="text-4xl font-black uppercase tracking-tighter">{model.name}</h1>
-        <p className="mt-3 font-bold uppercase tracking-widest text-xs text-neutral-400">{model.description}</p>
+      <div className="mb-8 p-8 border-2 border-black bg-black text-white flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <h1 className="text-4xl font-black uppercase tracking-tighter">{model.name}</h1>
+          <p className="mt-3 font-bold uppercase tracking-widest text-xs text-neutral-400">{model.description}</p>
+        </div>
+        <div className="hidden md:block w-full max-w-[160px] grayscale contrast-200 invert opacity-40 flex-shrink-0">
+          <Quiz color="#000000" style={{ height: '110px' }} />
+        </div>
       </div>
 
       <div className="bg-white border-2 border-black p-6 sm:p-10">

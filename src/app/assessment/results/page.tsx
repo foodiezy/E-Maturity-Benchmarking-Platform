@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import Link from 'next/link'
+import { PersonalDocuments } from 'undraw-react'
 
 export const dynamic = 'force-dynamic'
 
@@ -26,15 +27,20 @@ export default async function PersonalResultsDirectory() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-12">
-      <div className="flex items-end gap-6 mb-8 border-b-2 border-neutral-800 pb-8">
-        <Link href="/assessment" className="text-white hover:bg-white hover:text-black transition-colors border-2 border-white p-3">
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={3} d="M15 19l-7-7 7-7" />
-          </svg>
-        </Link>
-        <div>
-          <h1 className="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase">Past Results</h1>
-          <p className="text-neutral-400 font-bold uppercase tracking-widest text-sm mt-2">Review your securely isolated assessment history.</p>
+      <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8 border-b-2 border-neutral-800 pb-8">
+        <div className="flex items-end gap-6">
+          <Link href="/assessment" className="text-white hover:bg-white hover:text-black transition-colors border-2 border-white p-3">
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={3} d="M15 19l-7-7 7-7" />
+            </svg>
+          </Link>
+          <div>
+            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase">Past Results</h1>
+            <p className="text-neutral-400 font-bold uppercase tracking-widest text-sm mt-2">Review your securely isolated assessment history.</p>
+          </div>
+        </div>
+        <div className="hidden md:block w-full max-w-[180px] grayscale contrast-200 invert opacity-60">
+          <PersonalDocuments color="#000000" style={{ height: '120px' }} />
         </div>
       </div>
 

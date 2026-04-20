@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth"
 import { redirect, notFound } from "next/navigation"
 import Link from 'next/link'
 import PersonalAnalyticsChart from '@/components/PersonalAnalyticsChart'
+import { VisualData } from 'undraw-react'
 
 export const dynamic = 'force-dynamic'
 
@@ -35,20 +36,25 @@ export default async function PersonalResultDetail({ params }: { params: { id: s
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 animate-in slide-in-from-bottom-8 duration-700 ease-out">
-      <div className="flex items-center gap-4">
-        <Link href="/assessment/results" className="text-slate-400 hover:text-indigo-600 transition-colors bg-white p-2 rounded-full shadow-sm border border-slate-100">
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-          </svg>
-        </Link>
-        <div>
-          <h1 className="text-3xl font-black text-slate-900 tracking-tight">Personal footprint: <span className="text-indigo-600">{assessment.maturityModel.name}</span></h1>
-          <p className="text-slate-500 font-medium">Completed on {new Date(assessment.createdAt).toLocaleDateString()}</p>
+    <div className="max-w-5xl mx-auto space-y-8">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b-2 border-black pb-8">
+        <div className="flex items-center gap-4">
+          <Link href="/assessment/results" className="text-black hover:bg-black hover:text-white transition-colors border-2 border-black p-3">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={3} d="M15 19l-7-7 7-7" />
+            </svg>
+          </Link>
+          <div>
+            <h1 className="text-3xl md:text-4xl font-black text-black tracking-tighter uppercase">Personal Footprint</h1>
+            <p className="text-neutral-500 font-bold uppercase tracking-widest text-xs mt-2">{assessment.maturityModel.name} — {new Date(assessment.createdAt).toLocaleDateString()}</p>
+          </div>
+        </div>
+        <div className="hidden md:block w-full max-w-[160px] grayscale contrast-200 opacity-80">
+          <VisualData color="#000000" style={{ height: '100px' }} />
         </div>
       </div>
 
-      <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-4 sm:p-8">
+      <div className="bg-white border-2 border-black p-4 sm:p-8">
         {/* Pass the fully hydrated single-user assessment to the visualizer */}
         <PersonalAnalyticsChart rawData={assessment as any} />
       </div>

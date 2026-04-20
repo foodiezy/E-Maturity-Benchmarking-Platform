@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { Editable } from 'undraw-react'
 
 export default function MatrixEditorClient({ initialModel }: { initialModel: any }) {
   const router = useRouter()
@@ -183,13 +184,18 @@ export default function MatrixEditorClient({ initialModel }: { initialModel: any
           <h1 className="text-5xl font-black text-white tracking-tighter uppercase">{model.name}</h1>
           <p className="mt-3 text-xl text-neutral-400 font-bold">{model.description} <span className="inline-block px-2 border-2 border-neutral-700 text-sm ml-2">v{model.version}</span></p>
         </div>
-        <div className="flex gap-4">
-          <button onClick={()=>setIsEditingDetails(true)} className="px-6 py-3 border-2 border-neutral-800 text-white bg-black font-bold hover:border-white uppercase tracking-widest text-sm transition-colors">
-            Edit Meta
-          </button>
-          <button onClick={()=>setIsAddingDimension(true)} className="px-6 py-3 bg-white text-black font-black hover:bg-neutral-200 uppercase tracking-widest text-sm transition-colors">
-            + Dimension
-          </button>
+        <div className="flex items-end gap-6">
+          <div className="hidden lg:block w-full max-w-[140px] grayscale contrast-200 invert opacity-30 flex-shrink-0">
+            <Editable color="#000000" style={{ height: '100px' }} />
+          </div>
+          <div className="flex gap-4">
+            <button onClick={()=>setIsEditingDetails(true)} className="px-6 py-3 border-2 border-neutral-800 text-white bg-black font-bold hover:border-white uppercase tracking-widest text-sm transition-colors">
+              Edit Meta
+            </button>
+            <button onClick={()=>setIsAddingDimension(true)} className="px-6 py-3 bg-white text-black font-black hover:bg-neutral-200 uppercase tracking-widest text-sm transition-colors">
+              + Dimension
+            </button>
+          </div>
         </div>
       </div>
 
