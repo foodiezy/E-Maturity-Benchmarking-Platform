@@ -91,8 +91,9 @@ src/
 prisma/
 ├── schema.prisma       # Database schema definition
 └── seed.ts             # Database seed script
+prisma.config.ts        # Prisma configuration
 ```
 
 ## Licence
 
-This project was developed as an academic Final Year Project.
+All rights reserved.

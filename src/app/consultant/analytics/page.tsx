@@ -12,7 +12,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: { 
   const session = await getServerSession(authOptions)
   if (!session || !session.user) redirect('/api/auth/signin')
   
-  const user = session.user as any
+  const user = session.user
 
   // Fetch all organizations with their completed assessment counts for the picker
   const allOrgs = await prisma.organization.findMany({

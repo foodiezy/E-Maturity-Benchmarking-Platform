@@ -26,7 +26,7 @@ export default function NewModelButton() {
     <button 
       onClick={handleCreate}
       disabled={isCreating}
-      className="px-5 py-2.5 bg-slate-900 text-white rounded-xl font-semibold shadow-md shadow-slate-900/20 hover:bg-slate-800 transition-all disabled:opacity-50 hover:-translate-y-0.5 active:translate-y-0"
+      className="px-8 py-4 bg-black text-white font-black uppercase tracking-widest text-sm hover:bg-neutral-800 transition-colors disabled:opacity-50"
     >
       {isCreating ? 'Scaffolding...' : '+ New Model'}
     </button>

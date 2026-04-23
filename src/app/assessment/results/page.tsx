@@ -13,9 +13,8 @@ export default async function PersonalResultsDirectory() {
     redirect('/api/auth/signin')
   }
 
-  const userId = (session.user as any).id
+  const userId = session.user.id
 
-  // SECURE QUERY: Fetch only assessments where userId strictly matches the logged in user
   const myAssessments = await prisma.assessment.findMany({
     where: { userId },
     orderBy: { createdAt: 'desc' },

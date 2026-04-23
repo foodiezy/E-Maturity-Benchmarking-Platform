@@ -29,25 +29,25 @@ export const authOptions: NextAuthOptions = {
           role: user.role,
           organizationId: user.organizationId,
           organizationName: user.organization?.name || null
-        } as any
+        }
       }
     })
   ],
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as any).role
-        token.organizationId = (user as any).organizationId
-        token.organizationName = (user as any).organizationName
+        token.role = user.role
+        token.organizationId = user.organizationId
+        token.organizationName = user.organizationName
       }
       return token
     },
     async session({ session, token }) {
       if (session.user) {
-        (session.user as any).role = token.role;
-        (session.user as any).organizationId = token.organizationId;
-        (session.user as any).organizationName = token.organizationName;
-        (session.user as any).id = token.sub;
+        session.user.role = token.role ?? 'USER'
+        session.user.organizationId = token.organizationId
+        session.user.organizationName = token.organizationName
+        session.user.id = token.sub ?? ''
       }
       return session
     }

@@ -46,9 +46,9 @@ export default async function RootLayout({
                           <span className="text-xs font-black text-black uppercase tracking-widest truncate max-w-[180px]">
                             {session.user?.name || session.user?.email}
                           </span>
-                          {(session.user as any)?.organizationName && (
+                          {session.user?.organizationName && (
                             <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest truncate max-w-[180px]">
-                              {(session.user as any).organizationName}
+                              {session.user.organizationName}
                             </span>
                           )}
                         </div>

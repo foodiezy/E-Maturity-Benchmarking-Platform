@@ -10,9 +10,8 @@ export async function GET(req: Request, { params }: { params: { organizationId: 
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
     
-    // Basic authorization check: Ensure user belongs to this org or is consultant
-    const userRole = (session.user as any).role
-    const userOrgId = (session.user as any).organizationId
+    const userRole = session.user.role
+    const userOrgId = session.user.organizationId
     if (userRole !== 'CONSULTANT' && userRole !== 'ADMIN' && userOrgId !== params.organizationId) {
        return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }

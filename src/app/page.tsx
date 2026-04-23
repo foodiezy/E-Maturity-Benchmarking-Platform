@@ -27,7 +27,6 @@ export default function HomePage() {
         </div>
         
         <div className="flex-1 w-full max-w-xl flex justify-center lg:justify-end">
-          {/* We wrap the unDraw illustration in a div and apply CSS filters to force it to black/white */}
           <div className="w-full grayscale contrast-200 drop-shadow-2xl">
             <Analysis color="#000000" style={{ height: '250px' }} />
           </div>

@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     if (!session || !session.user) {
       return NextResponse.json({ error: 'Unauthorized. Please log in to your AIMM company account to save these results.' }, { status: 401 })
     }
-    const userObj = session.user as any
+    const userObj = session.user
     
     let orgId = userObj.organizationId;
     if (!orgId) {

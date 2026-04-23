@@ -29,9 +29,8 @@ export default async function PersonalResultDetail({ params }: { params: { id: s
     }
   })
 
-  // HARD SECURITY GATE: If assessment doesn't exist, or it doesn't belong to this exact user, explicitly deny.
-  // We throw a 404 (notFound) so malicious actors can't even confirm if the ID exists.
-  if (!assessment || assessment.userId !== (session.user as any).id) {
+  // Return 404 if assessment does not exist or does not belong to the current user
+  if (!assessment || assessment.userId !== session.user.id) {
     notFound()
   }
 
@@ -55,8 +54,7 @@ export default async function PersonalResultDetail({ params }: { params: { id: s
       </div>
 
       <div className="bg-white border-2 border-black p-4 sm:p-8">
-        {/* Pass the fully hydrated single-user assessment to the visualizer */}
-        <PersonalAnalyticsChart rawData={assessment as any} />
+        <PersonalAnalyticsChart rawData={assessment} />
       </div>
     </div>
   )

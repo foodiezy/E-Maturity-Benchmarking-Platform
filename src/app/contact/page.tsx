@@ -49,7 +49,6 @@ export default function ContactPage() {
   return (
     <div className="max-w-5xl mx-auto py-12 px-4 flex flex-col lg:flex-row gap-12 items-center">
       <div className="flex-1 w-full max-w-xl flex justify-center">
-        {/* unDraw illustration explicitly black/white */}
         <div className="w-full grayscale contrast-200 drop-shadow-2xl opacity-90">
           <MessageSent color="#000000" style={{ height: '300px' }} />
         </div>
